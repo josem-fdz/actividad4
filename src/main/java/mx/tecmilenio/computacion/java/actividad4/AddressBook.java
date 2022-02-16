@@ -2,12 +2,14 @@ package mx.tecmilenio.computacion.java.actividad4;
 
 import org.apache.commons.csv.CSVFormat;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static java.lang.System.getenv;
 import static java.lang.System.out;
 
 public class AddressBook {
@@ -27,7 +29,7 @@ public class AddressBook {
                     .parse(reader)
                     .stream()
                     .collect(Collectors.toMap(
-                                e -> e.get(0), e -> e.get(1)
+                            e -> e.get(0), e -> e.get(1)
                     ));
 
         } catch (IOException e) {
@@ -39,9 +41,7 @@ public class AddressBook {
     public void list() {
         out.println("-".repeat(60));
         contactos.keySet().forEach(it ->
-                out.println(
-                        String.format("%s:%s", it, contactos.get(it))
-                ));
+                out.printf("%s:%s%n", it, contactos.get(it)));
         out.println("-".repeat(60));
     }
 
